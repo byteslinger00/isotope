@@ -23,14 +23,13 @@ const Dashboard = () => {
   useEffect(() => {
     if (session) getData();
   }, [session]);
-
   async function getData() {
     try {
       setLoading(true);
       let { data, error, status } = await supabase
         .from("users")
         .select(`uid, created_at, phone_number, email, provider, is_disabled`);
-
+      
       if (error && status !== 406) {
         throw error;
       }
@@ -45,7 +44,7 @@ const Dashboard = () => {
     }
   }
 
-  loading ? 
+  return loading ? 
     "Loading..." : 
     <div className="w-full h-[100vh] bg-white flex" >
       <Sidebar />

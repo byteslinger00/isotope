@@ -6,7 +6,7 @@ interface props {
 }
 const Summary: React.FC<props> = ({ title, data, color }) => {
   return (
-    <div className="bg-white w-[100%] min-h-[300px] font-inter text-left border-[#E3E8F2] border-[1px] rounded-[10px] flex flex-col px-[24px] py-[22px] gap-[16px]">
+    <div className="bg-white w-full min-h-[300px] font-inter text-left border-[#E3E8F2] border-[1px] rounded-[10px] flex flex-col px-[24px] py-[22px] gap-[16px]">
       <p className="text-[#52678E] text-[14px]">{title}</p>
       {data.map((item, idx) => (
         <div
