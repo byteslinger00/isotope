@@ -1,3 +1,4 @@
+import Header from "@/components/header";
 import { LineChart } from "@/components/lineChart";
 import Sidebar from "@/components/sidebar";
 import TotalNum from "@/components/totalNum";
@@ -66,46 +67,47 @@ const Analytics = () => {
   return (
     <div className="w-full h-[100vh] bg-white flex">
       <Sidebar />
-      <section className="w-full px-8">
-        Analytics
-        <div className="grid grid-cols-2 gap-6">
-          <div className="w-full grid grid-cols-2 gap-6">
-            <TotalNum
-              title="Total Sessions"
-              value={430}
-              data={totalSession}
-              option={1}
-            />
-            <TotalNum
-              title="Total Visitors"
-              value={430}
-              data={totalVisitor}
-              option={1}
-            />
-            <TotalNum
-              title="Time Spent"
-              value={430}
-              data={timeSpent}
-              option={1}
-            />
-            <TotalNum
-              title="Bounce Rate"
-              value={430}
-              data={boundRate}
-              option={1}
-            />
+      <div className="w-full">
+        <Header headers={[{ href: "/analytics", name: "Analyitics" }]} />
+        <section className="w-full px-8">
+          Analytics
+          <div className="grid grid-cols-2 gap-6">
+            <div className="w-full grid grid-cols-2 gap-6">
+              <TotalNum
+                title="Total Sessions"
+                value={430}
+                data={totalSession}
+                option={1}
+              />
+              <TotalNum
+                title="Total Visitors"
+                value={430}
+                data={totalVisitor}
+                option={1}
+              />
+              <TotalNum
+                title="Time Spent"
+                value={430}
+                data={timeSpent}
+                option={1}
+              />
+              <TotalNum
+                title="Bounce Rate"
+                value={430}
+                data={boundRate}
+                option={1}
+              />
+            </div>
+            <div className="w-full"></div>
           </div>
-          <div className="w-full"></div>
-        </div>
-        <div className="grid grid-cols-2 gap-6">
-          <div className="w-full h-[300px]">
-            <LineChart data={monthlyView} option={2} />
+          <div className="grid grid-cols-2 gap-6 mt-6">
+            <div className="w-full h-[300px] border-border border-[1px] rounded-[10px] p-5">
+              <LineChart data={monthlyView} option={2} />
+            </div>
+            <div className="w-full"></div>
           </div>
-          <div className="w-full">
-            
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 };

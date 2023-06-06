@@ -17,10 +17,10 @@ const Home = () => {
   return (
     <div className="w-full h-[100vh] bg-white flex">
       <Sidebar />
-      <Header headers={[{ href: '/', name: 'Welcome Back 🎉' }]} />
-      <section className="w-full">
-        {!session ? <Auth /> : ""}
-      </section>
+      <div className="w-full">
+        <Header headers={[{ href: "/", name: "Welcome Back 🎉" }]} />
+        <section className="w-full">{!session ? <Auth /> : ""}</section>
+      </div>
     </div>
   );
 };
