@@ -30,7 +30,7 @@ const Home = () => {
     <div className="w-full h-[100vh] bg-white flex">
       <Sidebar />
       <div className="w-full">
-        <Header headers={[{ href: 'dashboard', name: 'Dashboard' }]} />
+        <Header headers={[{ href: 'dashboard', name: 'Dashboard Page' }]} />
         <section className="w-full p-8">
           <div className="grid grid-cols-4 gap-[24px]">
             <StatusNum title="Number of registered users" value={230} />
