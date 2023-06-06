@@ -44,14 +44,17 @@ const Dashboard = () => {
     }
   }
 
-  return loading ? 
-    "Loading..." : 
+  return (
     <div className="w-full h-[100vh] bg-white flex" >
       <Sidebar />
       <section className="w-full">
-        <UserTable users={users} />
+        { loading 
+          ? "Loading..." 
+          : <UserTable users={users} /> 
+        }
       </section>
     </div>
+  )
 };
 
 export default Dashboard;

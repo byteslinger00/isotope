@@ -33,10 +33,11 @@ const Navigation = ({ links }: Links) => {
       {links.map((link, idx) => 
           <div key={`lk-${idx}`}>
             <li 
-              className={`w-full px-4 py-2 my-2 hover:bg-white hover:rounded-md hover:drop-shadow-md hover:text-black ${pathname.startsWith(`/${link.href}`) ? 'bg-white rounded-md drop-shadow-md text-black' : ''}`}>
+              className={`w-full transition-colors px-4 py-2 my-2 hover:bg-white hover:rounded-md hover:drop-shadow-md hover:text-black ${pathname.startsWith(`/${link.href}`) ? 'bg-white rounded-md drop-shadow-md text-black' : ''}`}>
               <Link
                 href={link.href}
                 key={`link-${idx}`}
+                className='transition-colors'
               >
                 <span className="flex items-center"><link.icon />&nbsp;&nbsp;&nbsp;<span>{link.name}</span></span>
               </Link>

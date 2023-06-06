@@ -3,6 +3,7 @@ import Auth from "@/components/Auth";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Sidebar from "@/components/sidebar";
+import Header from "@/components/header";
 
 const Home = () => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const Home = () => {
   return (
     <div className="w-full h-[100vh] bg-white flex">
       <Sidebar />
+      <Header headers={[{ href: '/', name: 'Welcome Back 🎉' }]} />
       <section className="w-full">
         {!session ? <Auth /> : ""}
       </section>

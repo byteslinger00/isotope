@@ -27,9 +27,7 @@ const Auth = () => {
   return (
     <div className="bg-white mt-[50px] mx-[auto] w-[654px] h-[300px] font-inter text-center">
       <Toast ref={toast} />
-      <p className="font-matter font-bold text-[18px] leading-[26px] text-left">
-        Welcome Back 🎉
-      </p>
+      
       <h1 className="text-[24px] mb-[40px] font-bold">Login</h1>
       <div className="p-10 rounded-md border-[1px] border-bordermain">
         <div className="flex flex-row gap-6">
