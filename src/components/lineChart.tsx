@@ -1,4 +1,5 @@
 import React from "react";
+import { ChartOptions } from 'chart.js';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -20,7 +21,7 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
+const options = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -54,8 +55,61 @@ export const options = {
     },
   },
 };
+const bezier: ChartOptions<'line'> = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    title: {
+      text: 'Monthly Views',
+      display: true,
+      align: 'start',
+      color: '#000000',
+      font: {
+        size: 20,
+        weight: 'bold',
+      }
+    },
+    legend: {
+      display: true,
+      labels: {
+        color: 'rgb(0, 0, 0)',
+        boxWidth: 13,
+        useBorderRadius: true,
+        borderRadius: 7,
+      }
+    },
+  },
+  scales: {
+    x: {
+      grid: {
+      },
+      ticks: {
+        stepSize: 50,
+      }
+    },
+    y: {
+      grid: {
+        display: true,
+      },
+      min: 0,
+      max: 100,
+
+      ticks: {
+        // forces step size to be 50 units
+        display: true,
+        stepSize: 10,
+      },
+    },
+  },
+  elements: {
+    line: {
+      tension: 0.5,
+    },
+  }
+};
 
 const labels = ["1", "2", "3", "4", "5", "6"];
+const monthlabels = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", 'OCT', 'NOV', 'DEC'];
 
 const data1 = {
   labels,
@@ -70,8 +124,13 @@ const data1 = {
 };
 interface props {
   data: any;
+  option: number;
 }
-export const LineChart: React.FC<props> = ({ data }) => {
-  return <Line options={options} data={{ labels: labels, datasets: data }} />;
+export const LineChart: React.FC<props> = ({ data, option }) => {
+  return option === 1 ? (
+    <Line options={options} data={{ labels: labels, datasets: data }} />
+  ) : (
+    <Line options={bezier} data={{ labels: monthlabels, datasets: data }} />
+  );
 };
 export default LineChart;
