@@ -24,7 +24,7 @@ const Navigation = ({ links }: Links) => {
     if (error) {
       alert(error)
     } else {
-      router.replace('/');
+      router.push('/signin');
     };
   };
 

@@ -1,11 +1,10 @@
+import BubbleChart from "@/components/bubbleChart";
 import Header from "@/components/header";
+import Layout from "@/components/layout";
 import { LineChart } from "@/components/lineChart";
-import Sidebar from "@/components/sidebar";
 import TotalNum from "@/components/totalNum";
-import useAccess from "@/utils/useAccess";
 
 const Analytics = () => {
-  useAccess();
   const totalSession = [
     {
       label: "Dataset 1",
@@ -64,51 +63,72 @@ const Analytics = () => {
       backgroundColor: "#CE2A96",
     },
   ];
+  const toplocations = [
+    {
+      label: "USA",
+      data: [{ x: 0, y: 0, r: 60 }],
+      borderColor: "#356235",
+      backgroundColor: "#356235",
+    },
+    {
+      label: "Australia",
+      data: [{ x: 0.5, y: 0, r: 80 }],
+      borderColor: "#3576F4",
+      backgroundColor: "#3576F4",
+    },
+    {
+      label: "England",
+      data: [{ x: 1, y: 0.1, r: 70 }],
+      borderColor: "#7B61FF",
+      backgroundColor: "#7B61FF",
+    },
+  ];
   return (
-    <div className="w-full h-[100vh] bg-white flex">
-      <Sidebar />
-      <div className="w-full">
-        <Header headers={[{ href: "/analytics", name: "Analyitics" }]} />
-        <section className="w-full px-8">
-          Analytics
-          <div className="grid grid-cols-2 gap-6">
-            <div className="w-full grid grid-cols-2 gap-6">
-              <TotalNum
-                title="Total Sessions"
-                value={430}
-                data={totalSession}
-                option={1}
-              />
-              <TotalNum
-                title="Total Visitors"
-                value={430}
-                data={totalVisitor}
-                option={1}
-              />
-              <TotalNum
-                title="Time Spent"
-                value={430}
-                data={timeSpent}
-                option={1}
-              />
-              <TotalNum
-                title="Bounce Rate"
-                value={430}
-                data={boundRate}
-                option={1}
-              />
-            </div>
-            <div className="w-full"></div>
+    <Layout>
+    <div className="w-full">
+      <Header headers={[{ href: "analytics", name: "Analytics" }]} />
+      <section className="w-full px-8">
+        Analytics
+        <div className="grid grid-cols-2 gap-6">
+          <div className="w-full grid grid-cols-2 gap-6">
+            <TotalNum
+              title="Total Sessions"
+              value={430}
+              data={totalSession}
+              option={1}
+            />
+            <TotalNum
+              title="Total Visitors"
+              value={430}
+              data={totalVisitor}
+              option={1}
+            />
+            <TotalNum
+              title="Time Spent"
+              value={430}
+              data={timeSpent}
+              option={1}
+            />
+            <TotalNum
+              title="Bounce Rate"
+              value={430}
+              data={boundRate}
+              option={1}
+            />
           </div>
-          <div className="grid grid-cols-2 gap-6 mt-6">
-            <div className="w-full h-[300px] border-border border-[1px] rounded-[10px] p-5">
-              <LineChart data={monthlyView} option={2} />
-            </div>
-            <div className="w-full"></div>
+          <div className="w-full">
+            <BubbleChart data={toplocations} />
           </div>
-        </section>
-      </div>
+        </div>
+        <div className="grid grid-cols-2 gap-6 mt-6">
+          <div className="w-full h-[300px] border-border border-[1px] rounded-[10px] p-5">
+            <LineChart data={monthlyView} option={2} />
+          </div>
+          <div className="w-full"></div>
+        </div>
+      </section>
     </div>
+    </Layout>
   );
 };
 

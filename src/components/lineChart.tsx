@@ -92,7 +92,6 @@ const bezier: ChartOptions<'line'> = {
         display: true,
       },
       min: 0,
-      max: 100,
 
       ticks: {
         // forces step size to be 50 units
