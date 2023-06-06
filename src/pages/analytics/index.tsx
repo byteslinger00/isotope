@@ -12,6 +12,7 @@ const Home = () => {
       <div className="w-full">
         <Header headers={[{ href: 'analytics', name: 'Analytics' }]} />
         <section className="w-full p-8">
+          Analytics
         </section>
       </div>
     </div>
