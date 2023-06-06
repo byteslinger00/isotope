@@ -1,6 +1,4 @@
-import {
-  useSupabaseClient,
-} from "@supabase/auth-helpers-react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import StatusNum from "@/components/statusNum";
 import Summary from "@/components/summary";
 import useAccess from "@/utils/useAccess";
@@ -27,15 +25,15 @@ const Home = () => {
   return (
     <div className="w-full h-[100vh] bg-white flex">
       <Sidebar />
-      <section className="w-full px-[32px]">
+      <section className="w-full px-8">
         Dashboard Page
-        <div className="grid grid-cols-4 gap-[24px]">
+        <div className="grid grid-cols-4 gap-6">
           <StatusNum title="Number of registered users" value={230} />
           <StatusNum title="Number of active users" value={430} />
           <StatusNum title="Number of premium users" value={120} />
           <StatusNum title="Number of users online" value={300} />
         </div>
-        <div className="grid grid-cols-2 gap-[24px] mt-[24px]">
+        <div className="grid grid-cols-2 gap-6 mt-6">
           <Summary title="Summary of users state" data={data} color="#3576F4" />
           <Summary
             title="Summary of users state"
