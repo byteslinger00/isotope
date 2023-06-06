@@ -45,10 +45,10 @@ const UserTable: React.FC<Users> = ({ users }) => {
 
     const selectRow = (e: DataTableSelectEvent) => router.replace(`/details/${e.data.uid}`)
 
-    const footer = `Showing 4 of 10`;
+    const footer = 'Showing 4 of 10.'
 
     return (
-        <div className="card rounded-md">
+        <div className="card">
             <DataTable 
                 value={datas} 
                 selectionMode="single" 
@@ -57,8 +57,8 @@ const UserTable: React.FC<Users> = ({ users }) => {
                 dataKey="uid"
                 onRowSelect={selectRow} 
                 metaKeySelection={false} 
-                footer={footer} 
                 tableStyle={{ minWidth: '60rem' }}
+                footer={footer}
             >
                 <Column field="uid" header="User ID"></Column>
                 <Column field="created_at" header="Created At"></Column>
