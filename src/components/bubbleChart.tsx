@@ -17,6 +17,7 @@ ChartJS.register(
   LinearScale,
   PointElement,
   LineElement,
+  Tooltip,
   Title,
   Legend
 );
@@ -25,15 +26,20 @@ const options: ChartOptions<"bubble"> = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    title: {
-      text: "Top 3 Locations",
-      display: true,
-      align: "start",
-      color: "#000000",
-      font: {
-        size: 20,
-        weight: "bold",
-      },
+    tooltip: {
+      callbacks: {
+        label: function(context) {
+            let label = context.dataset.label || '';
+
+            if (label) {
+                label += ': ';
+            }
+            if (context.parsed.y !== null) {
+                label += context.parsed._custom;
+            }
+            return label;
+        }
+      }
     },
     legend: {
       display: true,
@@ -83,12 +89,11 @@ const options: ChartOptions<"bubble"> = {
   },
 };
 
-const labels = ["USA", "Australia", "England"];
 
 interface props {
   data: any;
 }
 export const BubbleChart: React.FC<props> = ({ data }) => {
-  return <Bubble options={options} data={{ labels: labels, datasets: data }} />;
+  return <Bubble options={options} data={{ datasets: data }} />;
 };
 export default BubbleChart;

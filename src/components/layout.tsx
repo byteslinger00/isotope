@@ -1,7 +1,9 @@
-import Sidebar from "@/components/sidebar";
-import { useSession, useSessionContext } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useSessionContext } from "@supabase/auth-helpers-react";
+
+import Sidebar from "@/components/sidebar";
+
 interface LayoutProps {
   children: React.ReactNode;
 }

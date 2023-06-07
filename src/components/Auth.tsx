@@ -1,8 +1,10 @@
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRef, useState } from "react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useRouter } from "next/router";
+
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
-import { useRouter } from "next/router";
+
 
 const Auth = () => {
   const [email, setEmail] = useState("");
