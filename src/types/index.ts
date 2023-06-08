@@ -24,3 +24,12 @@ export type HeaderType = {
     href: string;
     name: string;
 }
+
+export type ProfileType = {
+    uid: string;
+    created_at: string;
+    phone_number: string;
+    email:string;
+    provider:string;
+    is_disabled:boolean;
+}

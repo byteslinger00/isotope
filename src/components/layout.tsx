@@ -15,7 +15,7 @@ export default function Layout({ children }: LayoutProps) {
   useEffect(() => {
     if (!isLoading && !session) router.push("/signin");
     if (session && router.pathname === "/signin") router.push("/dashboard");
-  }, [session, isLoading]);
+  }, [session, isLoading, router]);
 
   return (
     <div className="w-full h-[100vh] bg-white flex">
