@@ -6,27 +6,30 @@ import {
 import { useEffect, useState } from "react";
 import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
 import { CgArrowRight } from "react-icons/cg";
+import { useRouter } from "next/router";
 
-import UserTable from "@/components/userTable";
+import Header from "@/components/header";
 import Sidebar from "@/components/sidebar";
-import Profile from "@/components/profile";
+import UserTable from "@/components/userTable";
+import Paginator from '@/components/paginator';
 import { Database } from "@/utils/database.types";
 import useAccess from "@/utils/useAccess";
 import { User } from "@/types";
 import { FilterUser } from "@/types";
-import Header from "@/components/header";
-
-type Profiles = Database["public"]["Tables"]["users"]["Row"];
 
 const Dashboard = () => {
   useAccess();
+  const router = useRouter();
   const { isLoading, session, error } = useSessionContext();
   const supabase = useSupabaseClient<Database>();
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<Array<User>>();
   const [totalNum, setTotalNum] = useState<number>(0);
-  const [selectedUser, setSelectedUser] = useState<string>('');
-  const [profile, setProfile] = useState<User | any>();
+  const [itemsPerPage] = useState<number>(3);
+  const [pageVal, setPageVal] = useState<{ start: number; end: number;}>({
+    start: 0,
+    end: itemsPerPage - 1
+  })
 
   const [filter, setFilter] = useState<FilterUser>({
     type: [],
@@ -35,10 +38,14 @@ const Dashboard = () => {
   });
 
   useEffect(() => {
-    if (session) getData();
-  }, [session]);
+    if (session) 
+      getData(pageVal);
+  }, [session, pageVal]);
 
-  async function getData() {
+  async function getData(val: {
+    start: number;
+    end: number;
+  }) {
     try {
       setLoading(true);
 
@@ -48,7 +55,8 @@ const Dashboard = () => {
 
       let datas = await supabase
         .from("users")
-        .select(`uid, created_at, phone_number, email, provider, is_disabled`);
+        .select(`uid, created_at, phone_number, email, provider, is_disabled`)
+        .range(val.start, val.end);
 
       if (total.error || datas.error) {
         throw error;
@@ -65,7 +73,6 @@ const Dashboard = () => {
       }
     } catch (error) {
       alert("Error loading user data!");
-      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -87,33 +94,19 @@ const Dashboard = () => {
     ],
   };
 
-  const selectUser = (uid: string) => {
-    setSelectedUser(uid);
-    fetchProfile(uid);
-  }
-
-  const fetchProfile = async (uid: string = selectedUser) => {
-    try {
-      let userProfile = await supabase
-        .from("users")
-        .select()
-        .eq('uid', uid);
-
-      setProfile(userProfile.data);
-    } catch (err) {
-      console.log(err);
-    }
+  const selectUser = async (uid: string) => {
+    await router.push(`usermanage/profile/${uid}`);
   }
 
   return (
     <div className="w-full h-[100vh] bg-white flex">
       <Sidebar />
       <div className="w-full ml-80">
-        <Header headers={[{ href: "usermanage", name: "User Management" }]} />
+        <Header headers={[{ href: '/usermanage', name: 'User Management'}]} />
         <section className="w-full p-8">
           {loading ? (
             "Loading..."
-          ) : (
+          ) :
             <>
               <div className="flex text-xl justify-between mb-4 font-bold items-center">
                 <span className="text-2xl">{totalNum} Users</span>
@@ -168,15 +161,26 @@ const Dashboard = () => {
                   </button>
                 </div>
               </div>
-              {
-                profile ?
-                  <Profile profile={profile} />
-                : 
-                  <UserTable users={users} selectUser={selectUser} />
-              }
-              {/* <Profile /> */}
+              <UserTable 
+                users={users} 
+                selectUser={selectUser}
+              />
             </>
-          )}
+          }
+          <div className='flex justify-between items-center'>
+            <span>Showing {pageVal.start + 1} - {pageVal.end + 1} users of {totalNum}</span>
+            {
+              totalNum === 0 
+              ?
+                <></>
+              :
+              <Paginator
+                items={totalNum}
+                itemsPerPage={itemsPerPage}
+                handleChange={setPageVal}
+              />
+            }
+          </div>
         </section>
       </div>
     </div>

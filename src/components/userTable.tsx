@@ -5,6 +5,8 @@ import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
+
+import Paginator from './paginator';
 import { User } from '@/types'
 
 interface Users {
@@ -44,8 +46,12 @@ const UserTable = ({ users, selectUser }: Users) => {
 
     const getSeverity = (type: User) => type.is_disabled ? 'success' : 'danger';
 
-
-    const footer = 'Showing 4 of 10'
+    // const selectPage = (startOffset: number, endOffset: number) => {
+    //     setValue({
+    //         start: startOffset,
+    //         end: endOffset
+    //     });
+    // }
 
     return (
         <div className="card usertable">
@@ -58,7 +64,7 @@ const UserTable = ({ users, selectUser }: Users) => {
                 onRowSelect={(e: DataTableSelectEvent) => selectUser(e.data.uid)} 
                 metaKeySelection={false} 
                 tableStyle={{ minWidth: '60rem' }}
-                footer={footer}
+                // footer={footer}
             >
                 <Column field="id" header="S/N"></Column>
                 <Column field="uid" header="User ID"></Column>
