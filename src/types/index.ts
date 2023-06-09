@@ -33,3 +33,14 @@ export type ProfileType = {
     provider:string;
     is_disabled:boolean;
 }
+
+export type SubscriptionType = {
+    id: string;
+    created_at: string;
+    user_id: string;
+    current_period_start: string;
+    current_period_end: string;
+    payment_method: number;
+    status: number;
+    token: string;
+}

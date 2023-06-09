@@ -7,6 +7,7 @@ import Header from "@/components/header";
 import Layout from "@/components/layout";
 import { useEffect } from "react";
 import getUsers from "@/actions/getUsers";
+import getPermiumUsers from "@/actions/getPremiumUsers";
 
 const Home = () => {
   const data = [
@@ -38,6 +39,7 @@ const Home = () => {
       let data = await getUsers();
       setRegisteredUsers(data.registered);
       setActiveUsers(data.active);
+      setPremiumUsers(await getPermiumUsers());
       console.log("Getting Data...");
       // setRegisteredUsers()
     })();

@@ -12,11 +12,27 @@ export type users = {
   provider?: string;
   is_disabled?: boolean;
 };
+
+export type subscriptions = {
+    id: number;
+    created_at: string;
+    user_id: string;
+    current_period_start: string;
+    current_period_end: string;
+    payment_method: number;
+    status: number;
+    token: string;
+  };
+
+
 export interface Database {
     public: {
         Tables: {
             users: {
                 Row: users;
+            },
+            subscriptions: {
+                Row: subscriptions;
             }
         };
         Views: {
