@@ -13,14 +13,15 @@ export default async function getPermiumUsers() {
 
         }),
     })
-    const data = await response.json();
-    console.log(data.data);
-    let now = new Date().toLocaleString();
-    let first = new Date(data.data[0].current_period_end).toLocaleString();
+    
+    if(response.ok === false)
+        return 0;
+        const data = await response.json();
+    let now = new Date().getTime();
     let count = 0;
     data.data.map((item: SubscriptionType) => {
-        let first = new Date(item.current_period_end).toLocaleString();
-        if(first >= now)
+        let datetime = new Date(item.current_period_end).getTime();
+        if(datetime >= now)
             count++;
     })
     return count;

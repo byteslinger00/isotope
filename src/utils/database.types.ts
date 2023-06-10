@@ -24,7 +24,15 @@ export type subscriptions = {
     token: string;
   };
 
-
+export type notifications = {
+    id: number;
+    created_at: string;
+    user_id: string;
+    message: string;
+    type: number;
+    datetime: string;
+    read: boolean;
+}
 export interface Database {
     public: {
         Tables: {
@@ -32,6 +40,9 @@ export interface Database {
                 Row: users;
             },
             subscriptions: {
+                Row: subscriptions;
+            },
+            notifications: {
                 Row: subscriptions;
             }
         };
