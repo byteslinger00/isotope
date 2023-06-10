@@ -98,6 +98,28 @@ const Dashboard = () => {
     await router.push(`usermanage/profile/${uid}`);
   }
 
+  const clickFilter = async () => {
+    try {
+      // let datas = await supabase
+      //   .from("users")
+      //   .select(`*, subscriptions!inner(current_period_start, current_period_end)`)
+      //   .gte('subscriptions.current_period_start', new Date().toISOString())
+      //   .lte('subscriptions.current_period_end', new Date().toISOString());
+
+      let datas = await supabase 
+        .from("subscriptions")
+        .select(`current_period_start, current_period_end, users!left(*)`)
+        .gte('current_period_start', new Date().toISOString())
+        .lte('current_period_end', new Date().toISOString())
+      
+        console.log(datas);
+
+        
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className="w-full h-[100vh] bg-white flex">
       <Sidebar />
@@ -156,7 +178,7 @@ const Dashboard = () => {
                     maxSelectedLabels={3}
                     className="w-full md:w-20rem select-center"
                   />
-                  <button className="bg-deepback text-white rounded-r-md px-4 text-xl">
+                  <button className="bg-deepback text-white rounded-r-md px-4 text-xl" onClick={clickFilter}>
                     <CgArrowRight />
                   </button>
                 </div>
