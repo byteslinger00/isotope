@@ -1,6 +1,7 @@
 export type Params = { [key: string]: string | string[] | undefined };
 
-export type Type = {
+export type User = {
+    id: number;
     uid: string;
     created_at: string;
     phone_number: string;
@@ -43,4 +44,10 @@ export type SubscriptionType = {
     payment_method: number;
     status: number;
     token: string;
+}
+
+export type FilterUser = {
+    type: string[] | null;
+    gender: string[] | null;
+    status: string[] | null;
 }
