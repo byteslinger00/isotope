@@ -20,7 +20,9 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="w-full h-[100vh] bg-white flex">
       <Sidebar />
+      <div className="w-full pl-80">
       {children}
+      </div>
     </div>
   );
 }
