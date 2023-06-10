@@ -40,7 +40,6 @@ const Home = () => {
       setRegisteredUsers(data.registered);
       setActiveUsers(data.active);
       setPremiumUsers(await getPermiumUsers());
-      console.log("Getting Data...");
       // setRegisteredUsers()
     })();
   }, [setRegisteredUsers, setActiveUsers, session]);
