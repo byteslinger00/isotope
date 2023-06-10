@@ -121,88 +121,86 @@ const Dashboard = () => {
 
   return (
     <Layout>
-      <div className="w-full ml-80">
-        <Header headers={[{ href: '/usermanage', name: 'User Management'}]} />
-        <section className="w-full p-8">
-          {loading ? (
-            "Loading..."
-          ) :
-            <>
-              <div className="flex text-xl justify-between mb-4 font-bold items-center">
-                <span className="text-2xl">{totalNum} Users</span>
-                <div className="flex">
-                  <span className="w-20 mr-4 whitespace-nowrap flex items-center">
-                    Filter by:&nbsp;&nbsp;
-                  </span>
-                  <MultiSelect
-                    value={filter?.type}
-                    onChange={(e: MultiSelectChangeEvent) =>
-                      setFilter((prevState: FilterUser) => ({
-                        ...prevState,
-                        type: e.value,
-                      }))
-                    }
-                    options={options.type}
-                    optionLabel="name"
-                    placeholder="Account type"
-                    maxSelectedLabels={3}
-                    className="w-full md:w-20rem select-left"
-                  />
-                  <MultiSelect
-                    value={filter?.status}
-                    onChange={(e: MultiSelectChangeEvent) =>
-                      setFilter((prevState: FilterUser) => ({
-                        ...prevState,
-                        status: e.value,
-                      }))
-                    }
-                    options={options.status}
-                    optionLabel="name"
-                    placeholder="Status"
-                    maxSelectedLabels={3}
-                    className="w-full md:w-20rem select-center"
-                  />
-                  <MultiSelect
-                    value={filter?.gender}
-                    onChange={(e: MultiSelectChangeEvent) =>
-                      setFilter((prevState: FilterUser) => ({
-                        ...prevState,
-                        gender: e.value,
-                      }))
-                    }
-                    options={options.gender}
-                    optionLabel="name"
-                    placeholder="Gender"
-                    maxSelectedLabels={3}
-                    className="w-full md:w-20rem select-center"
-                  />
-                  <button className="bg-deepback text-white rounded-r-md px-4 text-xl" onClick={clickFilter}>
-                    <CgArrowRight />
-                  </button>
-                </div>
+      <Header headers={[{ href: '/usermanage', name: 'User Management'}]} />
+      <section className="w-full p-8">
+        {loading ? (
+          "Loading..."
+        ) :
+          <>
+            <div className="flex text-xl justify-between mb-4 font-bold items-center">
+              <span className="text-2xl">{totalNum} Users</span>
+              <div className="flex">
+                <span className="w-20 mr-4 whitespace-nowrap flex items-center">
+                  Filter by:&nbsp;&nbsp;
+                </span>
+                <MultiSelect
+                  value={filter?.type}
+                  onChange={(e: MultiSelectChangeEvent) =>
+                    setFilter((prevState: FilterUser) => ({
+                      ...prevState,
+                      type: e.value,
+                    }))
+                  }
+                  options={options.type}
+                  optionLabel="name"
+                  placeholder="Account type"
+                  maxSelectedLabels={3}
+                  className="w-full md:w-20rem select-left"
+                />
+                <MultiSelect
+                  value={filter?.status}
+                  onChange={(e: MultiSelectChangeEvent) =>
+                    setFilter((prevState: FilterUser) => ({
+                      ...prevState,
+                      status: e.value,
+                    }))
+                  }
+                  options={options.status}
+                  optionLabel="name"
+                  placeholder="Status"
+                  maxSelectedLabels={3}
+                  className="w-full md:w-20rem select-center"
+                />
+                <MultiSelect
+                  value={filter?.gender}
+                  onChange={(e: MultiSelectChangeEvent) =>
+                    setFilter((prevState: FilterUser) => ({
+                      ...prevState,
+                      gender: e.value,
+                    }))
+                  }
+                  options={options.gender}
+                  optionLabel="name"
+                  placeholder="Gender"
+                  maxSelectedLabels={3}
+                  className="w-full md:w-20rem select-center"
+                />
+                <button className="bg-deepback text-white rounded-r-md px-4 text-xl" onClick={clickFilter}>
+                  <CgArrowRight />
+                </button>
               </div>
-              <UserTable 
-                users={users} 
-                selectUser={selectUser}
-              />
-            </>
+            </div>
+            <UserTable 
+              users={users} 
+              selectUser={selectUser}
+            />
+          </>
+        }
+        <div className='flex justify-between items-center'>
+          <span>Showing {pageVal.start + 1} - {pageVal.end + 1} users of {totalNum}</span>
+          {
+            totalNum === 0 
+            ?
+              <></>
+            :
+            <Paginator
+              items={totalNum}
+              itemsPerPage={itemsPerPage}
+              handleChange={setPageVal}
+            />
           }
-          <div className='flex justify-between items-center'>
-            <span>Showing {pageVal.start + 1} - {pageVal.end + 1} users of {totalNum}</span>
-            {
-              totalNum === 0 
-              ?
-                <></>
-              :
-              <Paginator
-                items={totalNum}
-                itemsPerPage={itemsPerPage}
-                handleChange={setPageVal}
-              />
-            }
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </Layout>
   );
 };
