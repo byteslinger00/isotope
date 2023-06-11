@@ -1,3 +1,5 @@
+import { NumberLiteralType } from "typescript";
+
 export type Json =
   | string
   | number
@@ -35,6 +37,7 @@ export type profiles = {
   tiktok?: string;
   meme?: string;
   movie?: string;
+  gender?: string;
 };
 
 export type xprofiles = profiles & {
@@ -56,6 +59,20 @@ export type xprofiles = profiles & {
   [key: string]: any;
 }
 
+export type status = {
+  uid: string;
+  created_at: string;
+  latitude: number;
+  longitude: number;
+  address: string;
+  is_online: boolean;
+}
+
+export type user_state = {
+  name:string | '';
+  value: number | 0;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -68,7 +85,9 @@ export interface Database {
       subscriptions: {
         Row: subscriptions;
       }
-      
+      status: {
+        Row: status;
+      }
     };
     Views: {
       [_ in never]: never;

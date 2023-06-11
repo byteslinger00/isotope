@@ -1,30 +1,53 @@
-// import { SubscriptionType } from "@/types";
-// import { convertToObject } from "typescript";
+import { SubscriptionType } from "@/types";
+import { profiles } from "@/utils/database.types";
+import { convertToObject } from "typescript";
 
 
-// export default async function getPermiumUsers() {
+export default async function getGenderState() {
 
-//     const response = await fetch("/api/dashboard/premium", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
+    const response = await fetch("/api/dashboard/gender", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
 
-//         }),
-//     })
+        }),
+    })
     
-//     if(response.ok === false)
-//         return 0;
-//         const data = await response.json();
-//     let now = new Date().getTime();
-//     let count = 0;
-//     data.data.map((item: SubscriptionType) => {
-//         let datetime = new Date(item.current_period_end).getTime();
-//         if(datetime >= now)
-//             count++;
-//     })
-//     return count;
-//     // setRegisteredUsers(3)
-//     // console.log(registerd_users);
-// }
+    if(response.ok === false)
+        return 0;
+    const data = await response.json();
+    let male: number = 0;
+    let female: number = 0;
+    let transgender: number = 0;
+    let nonbinary: number = 0;
+    let thirdgender: number = 0;
+    let genderneutral: number = 0;
+    data.data.map((item: profiles) => {
+        switch(item.gender)
+        {
+            case 'Male':
+                male++;
+                break;
+            case 'Female':
+                female++;
+                break;
+            case 'Transgender':
+                transgender++;
+                break;
+            case 'Non-binary':
+                nonbinary++;
+                break;
+            case 'Third gender':
+                thirdgender++;
+                break;
+            case 'Gender neutral':
+                genderneutral++;
+                break;
+            default: 
+                break;
+        }
+    })
+    return {male, female, transgender, nonbinary, thirdgender, genderneutral}    
+}

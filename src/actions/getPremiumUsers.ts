@@ -1,6 +1,4 @@
 import { SubscriptionType } from "@/types";
-import { convertToObject } from "typescript";
-
 
 export default async function getPermiumUsers() {
 
@@ -13,6 +11,7 @@ export default async function getPermiumUsers() {
 
         }),
     })
+    //const response = await fetch(`https://geocode.maps.co/reverse?lat=47.5951518&lon=-122.3316393`)
     
     if(response.ok === false)
         return 0;
