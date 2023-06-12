@@ -40,11 +40,11 @@ const UserTable = ({ users, selectUser }: Users) => {
         return <Rating value={0} readOnly cancel={false} />;
     };
 
-    const statusBodyTemplate = (type: User) => {
-        return <Tag value={type.is_disabled ? 'Allowed' : 'Not Allowed'} severity={getSeverity(type)}></Tag>;
-    };
+    // const statusBodyTemplate = (type: User) => {
+    //     return <Tag value={type.is_disabled ? 'Allowed' : 'Not Allowed'} severity={getSeverity(type)}></Tag>;
+    // };
 
-    const getSeverity = (type: User) => type.is_disabled ? 'success' : 'danger';
+    // const getSeverity = (type: User) => type.is_disabled ? 'success' : 'danger';
 
     // const selectPage = (startOffset: number, endOffset: number) => {
     //     setValue({
@@ -68,11 +68,10 @@ const UserTable = ({ users, selectUser }: Users) => {
             >
                 <Column field="id" header="S/N"></Column>
                 <Column field="uid" header="User ID"></Column>
-                <Column field="created_at" header="Created At"></Column>
-                <Column field="phone_number" header="Phone"></Column>
-                <Column field="email" header="Email"></Column>
-                <Column field="provider" header="Provider"></Column>
-                <Column header="Status" body={statusBodyTemplate}></Column>
+                <Column field="name" header="Name"></Column>
+                <Column field="gender" header="Gender"></Column>
+                <Column field="age" header="Age"></Column>
+                {/* <Column header="Status" body={statusBodyTemplate}></Column> */}
             </DataTable>
         </div>
     );

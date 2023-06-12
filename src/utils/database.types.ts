@@ -7,11 +7,10 @@ export type Json =
   | Json[];
 
 export type users = {
-  created_at?: string;
-  phone_number?: string;
-  email?: string;
-  provider?: string;
-  is_disabled?: boolean;
+  uid?: string;
+  name?: string;
+  gender?: string;
+  birthday?: string;
 };
 
 export type subscriptions = {
