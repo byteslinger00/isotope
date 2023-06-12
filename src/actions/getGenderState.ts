@@ -1,10 +1,8 @@
 import { SubscriptionType } from "@/types";
-import { profiles } from "@/utils/database.types";
+import { profiles, user_state } from "@/utils/database.types";
 import { convertToObject } from "typescript";
 
-
 export default async function getGenderState() {
-
     const response = await fetch("/api/dashboard/gender", {
         method: "POST",
         headers: {
@@ -17,37 +15,40 @@ export default async function getGenderState() {
     
     if(response.ok === false)
         return 0;
+    const result:Array<user_state> = [
+        { name: "Female", value: 0 },
+        { name: "Male", value: 0 },
+        { name: "Transgender", value: 0 },
+        { name: "Non-binary", value: 0 },
+        { name: "Third gender", value: 0 },
+        { name: "Gender neutral", value: 0 },
+    ];
     const data = await response.json();
-    let male: number = 0;
-    let female: number = 0;
-    let transgender: number = 0;
-    let nonbinary: number = 0;
-    let thirdgender: number = 0;
-    let genderneutral: number = 0;
     data.data.map((item: profiles) => {
         switch(item.gender)
         {
-            case 'Male':
-                male++;
+            case 'Woman':
+                result[0].value++;
                 break;
-            case 'Female':
-                female++;
+            case 'Man':
+                result[1].value++;
                 break;
             case 'Transgender':
-                transgender++;
+                result[2].value++;
                 break;
             case 'Non-binary':
-                nonbinary++;
+                result[3].value++;
                 break;
             case 'Third gender':
-                thirdgender++;
+                result[4].value++;
                 break;
             case 'Gender neutral':
-                genderneutral++;
+                result[5].value++;
                 break;
             default: 
                 break;
         }
     })
-    return {male, female, transgender, nonbinary, thirdgender, genderneutral}    
+    result.sort((a:user_state,b:user_state)=>(a.value<b.value ? 1 : -1))
+    return result;   
 }

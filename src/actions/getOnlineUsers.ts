@@ -30,6 +30,5 @@ export default async function getOnlineUsers() {
         }
     })
     address.sort((a:user_state,b:user_state)=>(a.value<b.value ? 1 : -1))
-    console.log(address);
     return {is_online: count, address: address};
 }

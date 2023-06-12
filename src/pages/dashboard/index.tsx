@@ -5,7 +5,7 @@ import StatusNum from "@/components/statusNum";
 import Summary from "@/components/summary";
 import Header from "@/components/header";
 import Layout from "@/components/layout";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import getUsers from "@/actions/getUsers";
 import getPermiumUsers from "@/actions/getPremiumUsers";
 import getOnlineUsers from "@/actions/getOnlineUsers";
@@ -13,46 +13,44 @@ import getGenderState from "@/actions/getGenderState";
 
 const Home = () => {
   
+  const [isloading, setLoading ] = useState(true);
 
-  const data1 = [
-    { name: "Female", value: 0 },
-    { name: "Male", value: 0 },
-    { name: "Transgender", value: 0 },
-    { name: "Non-binary", value: 0 },
-    { name: "Third gender", value: 0 },
-    { name: "Gender neutral", value: 0 },
-  ];
   const {
     registerd_users,
     active_users,
     premium_users,
     online_users,
     users_state,
+    gender_state,
     setRegisteredUsers,
     setActiveUsers,
     setOnlineUsers,
     setPremiumUsers,
     setUserState,
+    setGenderState,
   } = useParticipantStore((state) => state);
 
   const session = useSession();
 
   useEffect(() => {
     (async () => {
+      //Call actions and Skeleton true
+      setLoading(true);
       let data = await getUsers();
+      let premiumusers = await getPermiumUsers();
+      let userdata = await getOnlineUsers();
+      let genderstate = await getGenderState();
+      //Set datas to components
       setRegisteredUsers(data.registered);
       setActiveUsers(data.active);
-      setPremiumUsers(await getPermiumUsers());
-      let genderstate = await getGenderState();
-      console.log(genderstate)
-      let userdata = await getOnlineUsers();
+      setPremiumUsers(premiumusers);
       if (typeof userdata === 'object' && userdata !== null) 
       {
         setUserState(userdata.address);
         setOnlineUsers(userdata.is_online)
       }
-      console.log('getting data..')
-      // setRegisteredUsers()
+      if (Array.isArray(genderstate)) setGenderState(genderstate);
+      setLoading(false); //Skeleton false
     })();
   }, [setRegisteredUsers, setActiveUsers, session]);
 
@@ -65,21 +63,36 @@ const Home = () => {
             <StatusNum
               title="Number of registered users"
               value={registerd_users}
+              isloading={isloading}
             />
-            <StatusNum title="Number of active users" value={active_users} />
-            <StatusNum title="Number of premium users" value={premium_users} />
-            <StatusNum title="Number of users online" value={online_users} />
+            <StatusNum 
+              title="Number of active users" 
+              value={active_users} 
+              isloading={isloading}
+            />
+            <StatusNum 
+              title="Number of premium users" 
+              value={premium_users} 
+              isloading={isloading}
+            />
+            <StatusNum 
+              title="Number of users online" 
+              value={online_users} 
+              isloading={isloading}
+            />
           </div>
           <div className="grid grid-cols-2 gap-6 mt-6">
             <Summary
               title="Summary of users state"
               data={users_state?.length ? users_state : []}
               color="#3576F4"
+              isloading={isloading}
             />
             <Summary
               title="Summary of users state"
-              data={data1}
+              data={gender_state}
               color="#FAC137"
+              isloading={isloading}
             />
           </div>
         </section>

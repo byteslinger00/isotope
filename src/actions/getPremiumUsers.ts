@@ -11,7 +11,6 @@ export default async function getPermiumUsers() {
 
         }),
     })
-    //const response = await fetch(`https://geocode.maps.co/reverse?lat=47.5951518&lon=-122.3316393`)
     
     if(response.ok === false)
         return 0;
@@ -24,6 +23,4 @@ export default async function getPermiumUsers() {
             count++;
     })
     return count;
-    // setRegisteredUsers(3)
-    // console.log(registerd_users);
 }

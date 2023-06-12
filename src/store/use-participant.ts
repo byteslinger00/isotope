@@ -10,11 +10,13 @@ export interface ParticipantState {
     premium_users: number,
     online_users: number,
     users_state: Array<user_state>,
+    gender_state: Array<user_state>,
     setRegisteredUsers: (value: number) => void,
     setActiveUsers: (value: number) => void,
     setPremiumUsers: (value: number) => void,
     setOnlineUsers: (value: number) => void,
     setUserState: (valuue: Array<user_state>) => void,
+    setGenderState: (valuue: Array<user_state>) => void,
 }
 const data = [
     { name: "New York", value: 230 },
@@ -29,10 +31,13 @@ const useParticipantStore = create<ParticipantState>((set) => ({
     premium_users: 0,
     online_users: 0,
     users_state: [],
+    gender_state: [],
     setRegisteredUsers: (value: number) => set((state) => ({ registerd_users: value })),
     setActiveUsers: (value: number) => set((state) => ({ active_users: value })),
     setPremiumUsers: (value: number) => set((state) => ({ premium_users: value })),
     setOnlineUsers: (value: number) => set((state) => ({ online_users: value })),
+    setUserState: (value: Array<user_state>) => set((state) => ({ users_state: value })),
+    setGenderState: (value: Array<user_state>) => set((state) => ({ gender_state: value })),
     initiateStore: () => set((state) => {
         return {
             registerd_users: 0,
@@ -41,9 +46,6 @@ const useParticipantStore = create<ParticipantState>((set) => ({
             online_users: 0,
         }
     }),
-    setUserState: (value: Array<user_state>) => set((state) => ({
-        users_state: value
-    }))
 }));
 
 export default useParticipantStore;
