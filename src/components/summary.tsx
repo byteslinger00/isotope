@@ -15,7 +15,7 @@ const Summary: React.FC<props> = ({ title, data, color }) => {
           key={`summary-${idx}`}
           className="flex flex-row gap-3 justify-items-stretch h-10"
         >
-          <span className="flex-none min-w-[100px] my-auto">{item.name}</span>
+          <span className="flex-none min-w-[150px] my-auto">{item.name}</span>
           <div className="grow my-auto">
             <div
               className="h-4 rounded-[4px] "

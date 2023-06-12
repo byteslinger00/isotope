@@ -69,8 +69,8 @@ export type status = {
 }
 
 export type user_state = {
-  name:string | '';
-  value: number | 0;
+  name:string;
+  value: number;
 }
 
 export interface Database {
