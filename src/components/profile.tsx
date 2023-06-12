@@ -1,4 +1,5 @@
-import { User } from "@/types";
+import Image from "next/image";
+
 import { xprofiles } from "@/utils/database.types";
 
 interface Profile {
@@ -47,7 +48,7 @@ const Profile = ({profile}: Profile) => {
     <>
       <div className="rounded-md border border-border w-full h-30 p-5 flex justify-between">
         <div className="h-20 flex items-center font-bold text-xl">
-          <img src={profile.photos ? JSON.parse(profile.photos)[0] : 'user/01.png'} className="w-20 h-20 object-cover rounded-full border-2 border-black mr-4" alt="" />
+          <Image width='200' height='200' src={profile.photos ? JSON.parse(profile.photos)[0] : '/user/01.png'} className="w-20 h-20 object-cover rounded-full border-2 border-black mr-4" alt="" />
           ID:&nbsp;{profile.uid}
         </div>
         <div className="flex gap-4 items-center">
@@ -148,7 +149,7 @@ const Profile = ({profile}: Profile) => {
       <div className="rounded-md bg-grayback border border-border w-full p-5">
         <p className="mb-4 text-normaltext font-bold text-xl">Verification Selfie</p>
         <div className="h-20">
-          <img src={profile.photos ? JSON.parse(profile.photos)[0] : 'user/01.png'} className="w-20 h-20 object-cover rounded-full border-2 border-black mr-4" alt="" />
+          <Image width='200' height='200' src={profile.photos ? JSON.parse(profile.photos)[0] : '/user/01.png'} className="w-20 h-20 object-cover rounded-full border-2 border-black mr-4" alt="" />
         </div>
       </div>
     </>

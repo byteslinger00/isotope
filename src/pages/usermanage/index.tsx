@@ -8,21 +8,20 @@ import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
 import { CgArrowRight } from "react-icons/cg";
 import { useRouter } from "next/router";
 
+import Layout from "@/components/layout";
 import Header from "@/components/header";
-import Sidebar from "@/components/sidebar";
 import UserTable from "@/components/userTable";
 import Paginator from '@/components/paginator';
 import { Database } from "@/utils/database.types";
 import { User } from "@/types";
 import { FilterUser } from "@/types";
-import Layout from "@/components/layout";
 
 const Dashboard = () => {
   const router = useRouter();
   const { isLoading, session, error } = useSessionContext();
   const supabase = useSupabaseClient<Database>();
   const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState<Array<User>>();
+  const [users, setUsers] = useState<Array<User> | any>();
   const [totalNum, setTotalNum] = useState<number>(0);
   const [itemsPerPage] = useState<number>(3);
   const [pageVal, setPageVal] = useState<{ start: number; end: number;}>({
@@ -48,13 +47,22 @@ const Dashboard = () => {
     try {
       setLoading(true);
 
+      let calAge = (dt: User | any) => {
+        let thisYear = new Date().getFullYear();
+        if (dt.birthday) {
+          return thisYear - new Date(dt.birthday).getFullYear();
+        } else {
+          return null
+        }
+      }
+
       let total = await supabase
-        .from("users")
+        .from("profiles")
         .select("*", { count: "exact", head: true });
 
       let datas = await supabase
-        .from("users")
-        .select(`uid, created_at, phone_number, email, provider, is_disabled`)
+        .from("profiles")
+        .select(`uid, name, gender, birthday`)
         .range(val.start, val.end);
 
       if (total.error || datas.error) {
@@ -66,7 +74,7 @@ const Dashboard = () => {
           datas.data.map((dt, index) => ({
             ...dt,
             id: index + 1,
-            created_at: new Date(dt.created_at).toLocaleString(),
+            age: calAge(dt)
           }))
         );
       }
@@ -99,17 +107,11 @@ const Dashboard = () => {
 
   const clickFilter = async () => {
     try {
-      // let datas = await supabase
-      //   .from("users")
-      //   .select(`*, subscriptions!inner(current_period_start, current_period_end)`)
-      //   .gte('subscriptions.current_period_start', new Date().toISOString())
-      //   .lte('subscriptions.current_period_end', new Date().toISOString());
-
-      let datas = await supabase 
-        .from("subscriptions")
-        .select(`current_period_start, current_period_end, users!left(*)`)
-        .gte('current_period_start', new Date().toISOString())
-        .lte('current_period_end', new Date().toISOString())
+      let datas = await supabase
+        .from("profiles")
+        .select(`*, subscriptions!inner(current_period_start, current_period_end)`)
+        .gte('subscriptions.current_period_start', new Date().toISOString())
+        .lte('subscriptions.current_period_end', new Date().toISOString());
       
         console.log(datas);
 

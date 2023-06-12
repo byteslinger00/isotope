@@ -3,11 +3,10 @@ export type Params = { [key: string]: string | string[] | undefined };
 export type User = {
     id: number;
     uid: string;
-    created_at: string;
-    phone_number: string;
-    email: string;
-    provider: string;
-    is_disabled: boolean;
+    name: string;
+    gender: string;
+    birthday: string;
+    age: number;
 }
 
 export type Summary = {
