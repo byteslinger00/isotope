@@ -18,13 +18,7 @@ export interface ParticipantState {
     setUserState: (valuue: Array<user_state>) => void,
     setGenderState: (valuue: Array<user_state>) => void,
 }
-const data = [
-    { name: "New York", value: 230 },
-    { name: "Oregon", value: 80 },
-    { name: "Texas", value: 50 },
-    { name: "Ohio", value: 40 },
-    { name: "Ohio", value: 40 },
-  ];
+
 const useParticipantStore = create<ParticipantState>((set) => ({
     registerd_users: 0,
     active_users: 0,
