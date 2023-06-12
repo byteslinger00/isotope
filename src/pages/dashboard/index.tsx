@@ -41,6 +41,7 @@ const Home = () => {
       let premiumusers = await getPermiumUsers();
       let userdata = await getOnlineUsers();
       let genderstate = await getGenderState();
+      
       //Set datas to components
       setRegisteredUsers(data.registered);
       setActiveUsers(data.active);
@@ -53,7 +54,7 @@ const Home = () => {
       if (Array.isArray(genderstate)) setGenderState(genderstate);
       setLoading(false); //Skeleton false
     })();
-  }, [setRegisteredUsers, setActiveUsers, session]);
+  }, [setGenderState, setOnlineUsers, setPremiumUsers, setUserState,setRegisteredUsers, setActiveUsers, session]);
 
   return (
     <Layout>

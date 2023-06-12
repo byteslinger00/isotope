@@ -50,7 +50,7 @@ const options: ChartOptions<"bubble"> = {
           family: "Inter",
         },
         color: "#000000",
-        boxWidth: 13,
+        boxWidth: 14,
         useBorderRadius: true,
         borderRadius: 7,
       },

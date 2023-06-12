@@ -38,7 +38,7 @@ export type ProfileType = {
 export type SubscriptionType = {
     id: string;
     created_at: string;
-    user_id: string;
+    uid: string;
     current_period_start: string;
     current_period_end: string;
     payment_method: number;

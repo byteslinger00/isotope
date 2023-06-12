@@ -14,7 +14,7 @@ export default async function getOnlineUsers() {
     })
     if(users.ok === false)
         return 0;
-    let address:Array<user_state> = [{name:'a',value: 5},{name:'New York',value: 5}];
+    let address:Array<user_state> = [];
     let count = 0;
     const data = await users.json();
     data.data.map((item:status) => {
