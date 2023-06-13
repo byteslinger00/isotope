@@ -1,4 +1,4 @@
-import { SubscriptionType } from "@/types";
+import { subscriptions } from "@/types/subscription.type";
 
 export default async function getPermiumUsers() {
 
@@ -17,7 +17,7 @@ export default async function getPermiumUsers() {
         const data = await response.json();
     let now = new Date().getTime();
     let count = 0;
-    data.data.map((item: SubscriptionType) => {
+    data.data.map((item: subscriptions) => {
         let datetime = new Date(item.current_period_end).getTime();
         if(datetime >= now)
             count++;
