@@ -24,7 +24,7 @@ const Auth = () => {
         detail: "Email address or password ",
         life: 2000,
       });
-    } else router.push("/dashboard");
+    } else router.reload();
   }
 
   return (
