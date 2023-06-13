@@ -25,6 +25,7 @@ const Auth = () => {
         life: 2000,
       });
     } else router.reload();
+    console.log('Login Failed');
   }
 
   return (
