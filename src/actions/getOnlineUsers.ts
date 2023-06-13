@@ -1,5 +1,5 @@
-import { status } from "@/utils/database.types";
-import { user_state } from "@/utils/database.types";
+import { user_state } from "@/types/users.type";
+import { status } from '@/types/status.type'
 
 export default async function getOnlineUsers() {
     

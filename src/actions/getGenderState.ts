@@ -1,6 +1,5 @@
-import { SubscriptionType } from "@/types";
-import { profiles, user_state } from "@/utils/database.types";
-import { convertToObject } from "typescript";
+import { profiles } from "@/types/profile.type";
+import { user_state } from "@/types/users.type";
 
 export default async function getGenderState() {
     const response = await fetch("/api/dashboard/gender", {
