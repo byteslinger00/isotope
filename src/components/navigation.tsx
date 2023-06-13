@@ -48,7 +48,7 @@ const Navigation = ({ links }: Links) => {
       }
       {
         session ? 
-        <button onClick={signOut} className='w-full'>
+        <button onClick={async ()=> await signOut()} className='w-full'>
           <li className="w-full lg:px-4 px-2 py-2 my-2 hover:bg-white hover:rounded-md hover:drop-shadow-md hover:text-black">
             <span className="flex items-center"><FiLogOut /><span className='lg:block hidden'>&nbsp;&nbsp;&nbsp;Log out</span></span>
           </li>

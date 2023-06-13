@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import { InputText } from "primereact/inputtext";
 import { Toast } from "primereact/toast";
 
-
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassowrd] = useState("");
@@ -13,7 +12,7 @@ const Auth = () => {
   const toast = useRef<any>(null);
   const router = useRouter();
 
-  async function signInWithEmail() {
+  const signInWithEmail = async () => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
@@ -25,7 +24,7 @@ const Auth = () => {
         detail: "Email address or password ",
         life: 2000,
       });
-    } else router.push("/dashboard");
+    } else router.reload();
   }
 
   return (
