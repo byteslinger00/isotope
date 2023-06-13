@@ -46,7 +46,7 @@ export type SubscriptionType = {
 }
 
 export type FilterUser = {
-    type: string[] | null;
-    gender: string[] | null;
-    status: string[] | null;
+    type: { name: string, code: boolean }[] | null;
+    gender: { name: string, code: string }[] | null;
+    status: { name: string, code: string }[] | null;
 }
