@@ -14,6 +14,7 @@ export const middleware = async (req: NextRequest) => {
   else if(session.data.session && url[url.length - 1] == 'signin')
     return NextResponse.redirect(new URL("/dashboard", req.url));
   console.log('middleware...')
+  console.log('checking....')
 }
 
 export const config = {
