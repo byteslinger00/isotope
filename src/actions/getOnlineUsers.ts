@@ -17,6 +17,7 @@ export default async function getOnlineUsers() {
     let address:Array<user_state> = [];
     let count = 0;
     const data = await users.json();
+    console.log(data);
     data.data.map((item:status) => {
         if(item.is_online === true)
             count++;
